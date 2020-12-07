@@ -42,7 +42,21 @@ export default function Dogs() {
               alt={context.dogNode.imageDescription}
             />
             <h3>Descriptions:</h3>
-            <p>{context.dogNode.story}</p>
+            <p>
+              <span className="bold">Story: </span> {context.dogNode.story}
+            </p>
+            <p>
+              <span className="bold">Gender: </span>
+              {context.dogNode.gender}
+            </p>
+            <p>
+              {" "}
+              <span className="bold">Age: </span> {context.dogNode.age}{" "}
+            </p>
+            <p>
+              {" "}
+              <span className="bold">Breed: </span> {context.dogNode.breed}{" "}
+            </p>
             <button onClick={handleClickAdopt}>Adopt Me</button>
             <button onClick={(e) => seeMoreDogs(e, context)}>
               More Dogs Options

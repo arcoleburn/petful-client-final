@@ -42,10 +42,21 @@ export default function Cats() {
               alt={context.catNode.imageDescription}
             />
             <h3>Descriptions:</h3>
-            <p> Story: {context.catNode.story}</p>
-            <p> Gender: {context.catNode.gender}</p>
-            <p> Age: {context.catNode.age} </p>
-            <p> Breed: {context.catNode.breed} </p>
+            <p>
+              <span className="bold">Story: </span> {context.catNode.story}
+            </p>
+            <p>
+              <span className="bold">Gender: </span>
+              {context.catNode.gender}
+            </p>
+            <p>
+              {" "}
+              <span className="bold">Age: </span> {context.catNode.age}{" "}
+            </p>
+            <p>
+              {" "}
+              <span className="bold">Breed: </span> {context.catNode.breed}{" "}
+            </p>
             <button onClick={handleClickAdopt}>Adopt Me</button>
             <button onClick={(e) => seeMoreCats(e, context)}>
               More Cats Options
