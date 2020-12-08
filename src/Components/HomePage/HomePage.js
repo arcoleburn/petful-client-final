@@ -7,14 +7,18 @@ export default function HomePage(props) {
     console.log("handle click on home page was clicked");
     const name = e.target.name.value;
     console.log(name);
+    const nameData = {
+      name: name,
+    };
     if (!name) {
       context.setError("Please Enter Valid Name");
       return;
     } else {
       context.setName(name);
+      context.addPeople(nameData);
       context.setError("");
       console.log(context.name);
-      props.history.push("/adoption");
+      props.history.push("/confirmation");
     }
   };
   return (

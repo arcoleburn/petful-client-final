@@ -1,9 +1,24 @@
 import React from "react";
 import Context from "../Context/Context";
+import { Link } from "react-router-dom";
 
-export default function Cats() {
-  const handleClickAdopt = () => {
+export default function Cats(props) {
+  const handleClickAdopt = (e, context) => {
     console.log("adopt button was clicked!");
+    //add adoptDog from context
+    const name = context.name;
+    console.log(name);
+    const nameData = {
+      name: name,
+    };
+    if (!name) {
+      context.setError("Error: name is invalid");
+      console.log(props);
+    } else {
+      context.cats.pop();
+      context.addPeople(nameData);
+      console.log(props);
+    }
   };
 
   const seeMoreCats = (e, context) => {
@@ -14,12 +29,22 @@ export default function Cats() {
           console.log(i + 1);
           const nextCat = context.cats[i + 1];
           console.log(nextCat);
-          context.setCatNode(nextCat);
-          return;
+          if (!nextCat) {
+            context.setError("There are no more cats in the database");
+          } else {
+            context.setCatNode(nextCat);
+            context.setError("");
+            return;
+          }
         }
       })
     )
       return;
+  };
+
+  const clearName = (e, context) => {
+    console.log("name will be cleared");
+    context.setName("");
   };
 
   return (
@@ -35,7 +60,9 @@ export default function Cats() {
         }
         return (
           <div>
-            <h1>Cats</h1>
+            <Link onClick={(e) => clearName(e, context)} to={{ pathname: "/" }}>
+              <h1>Cats</h1>
+            </Link>
             <h2>{context.catNode.name}</h2>
             <img
               src={context.catNode.imageURL}
@@ -57,10 +84,13 @@ export default function Cats() {
               {" "}
               <span className="bold">Breed: </span> {context.catNode.breed}{" "}
             </p>
-            <button onClick={handleClickAdopt}>Adopt Me</button>
+            <button onClick={(e) => handleClickAdopt(e, context)}>
+              Adopt Me
+            </button>{" "}
             <button onClick={(e) => seeMoreCats(e, context)}>
               More Cats Options
             </button>
+            <p className="error">{context.error}</p>
           </div>
         );
       }}

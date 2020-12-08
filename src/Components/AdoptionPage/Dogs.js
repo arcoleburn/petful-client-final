@@ -1,5 +1,6 @@
 import React from "react";
 import Context from "../Context/Context";
+import { Link } from "react-router-dom";
 
 export default function Dogs(props) {
   const handleClickAdopt = (e, context) => {
@@ -14,8 +15,8 @@ export default function Dogs(props) {
       context.setError("Error: name is invalid");
       console.log(props);
     } else {
+      context.dogs.pop();
       context.addPeople(nameData);
-      context.setName("");
       console.log(props);
       props.history.push("./confirmation");
     }
@@ -42,6 +43,11 @@ export default function Dogs(props) {
       return;
   };
 
+  const clearName = (e, context) => {
+    console.log("clearing name from dog route");
+    context.setName("");
+  };
+
   return (
     <Context.Consumer>
       {(context) => {
@@ -55,7 +61,9 @@ export default function Dogs(props) {
         }
         return (
           <div>
-            <h1>Dogs</h1>
+            <Link onClick={(e) => clearName(e, context)} to={{ pathname: "/" }}>
+              <h1>Dogs</h1>
+            </Link>
             <h2>{context.dogNode.name}</h2>
             <img
               src={context.dogNode.imageURL}
@@ -80,7 +88,7 @@ export default function Dogs(props) {
             </p>
             <button onClick={(e) => handleClickAdopt(e, context)}>
               Adopt Me
-            </button>
+            </button>{" "}
             <button onClick={(e) => seeMoreDogs(e, context)}>
               More Dogs Options
             </button>

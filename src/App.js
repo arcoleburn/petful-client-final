@@ -69,6 +69,23 @@ class App extends Component {
           });
         });
     },
+    deletePeople: () => {
+      fetch(`${API_ENDPOINT}/people`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.setState({
+            people: data,
+          });
+        })
+        .catch((e) => {
+          throw new Error("person wasnt deleted");
+        });
+    },
     adoptCat: () => {
       fetch(`${API_ENDPOINT}/cat`, {
         method: "DELETE",
@@ -76,6 +93,7 @@ class App extends Component {
           "content-type": "application/json",
         },
       })
+        .then((res) => res.json())
         .then((data) => {
           this.setState({
             cats: data,
@@ -123,7 +141,10 @@ class App extends Component {
             <Route path="/adoption" component={AdoptionPage} />
             <Route path="/dog" component={Dogs} />
             <Route path="/cat" component={Cats} />
-            <Route path="/confirmation" component={Confirmation} />
+            <Route
+              path="/confirmation"
+              render={(props) => <Confirmation {...props} />}
+            />
           </div>
         </ErrorBoundary>
       </Context.Provider>

@@ -7,7 +7,7 @@ export default function AdoptionPage() {
       <h1>Pick your fury friend!</h1>
       <Link to={{ pathname: "/dog" }}>
         <button>Dogs</button>
-      </Link>
+      </Link>{" "}
       <Link to={{ pathname: "/cat" }}>
         <button>Cats</button>
       </Link>
