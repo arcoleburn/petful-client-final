@@ -118,11 +118,13 @@ class App extends Component {
     return (
       <Context.Provider value={this.state}>
         <ErrorBoundary>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/adoption" component={AdoptionPage} />
-          <Route path="/dog" component={Dogs} />
-          <Route path="/cat" component={Cats} />
-          <Route path="/confirmation" component={Confirmation} />
+          <div className="app">
+            <Route exact path="/" component={HomePage} />
+            <Route path="/adoption" component={AdoptionPage} />
+            <Route path="/dog" component={Dogs} />
+            <Route path="/cat" component={Cats} />
+            <Route path="/confirmation" component={Confirmation} />
+          </div>
         </ErrorBoundary>
       </Context.Provider>
     );

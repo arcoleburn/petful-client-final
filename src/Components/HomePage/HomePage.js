@@ -22,27 +22,29 @@ export default function HomePage(props) {
       {(context) => {
         return (
           <div className="home">
-            <h1>Welcome To Petful</h1>
-            <p>
-              We are an animal shelter for cats and dogs. Adoption is on a first
-              come first serve basis. If you are lucky, you may be first in
-              line! If not, you will be put in a queue before you can take your
-              new pet home.
-            </p>
-            <form
-              onSubmit={(e) => {
-                handleClick(e, context);
-              }}
-            >
+            <div className="homeSection">
+              <h1>Welcome To Petful</h1>
               <p>
-                <label>Enter your name here: </label>
+                We are an animal shelter for cats and dogs. Adoption is on a
+                first come first serve basis. If you are lucky, you may be first
+                in line! If not, you will be put in a queue before you can take
+                your new pet home.
               </p>
-              <p>
-                <input name="name" type="text" placeholder="John Smith" />
-              </p>
-              <p>{context.error}</p>
-              <button type="submit">Start Your Search Now!</button>
-            </form>
+              <form
+                onSubmit={(e) => {
+                  handleClick(e, context);
+                }}
+              >
+                <p>
+                  <label>Enter your name here: </label>
+                </p>
+                <p>
+                  <input name="name" type="text" placeholder="John Smith" />
+                </p>
+                <p className="error">{context.error}</p>
+                <button type="submit">Start Your Search Now!</button>
+              </form>
+            </div>
           </div>
         );
       }}

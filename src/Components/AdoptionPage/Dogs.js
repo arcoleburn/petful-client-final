@@ -26,11 +26,16 @@ export default function Dogs(props) {
       context.dogs.filter((dog, i) => {
         const current = dog.name === context.dogNode.name;
         if (current) {
-          console.log(i + 1);
-          const nextDog = context.dogs[i + 1];
-          console.log(nextDog);
-          context.setDogNode(nextDog);
-          return;
+          const nextIndex = i + 1;
+          const nextDog = context.dogs[nextIndex];
+          if (!nextDog) {
+            context.setError("There are no more dogs in the database");
+          } else {
+            console.log(nextDog);
+            context.setDogNode(nextDog);
+            context.setError("");
+            return;
+          }
         }
       })
     )
@@ -79,7 +84,7 @@ export default function Dogs(props) {
             <button onClick={(e) => seeMoreDogs(e, context)}>
               More Dogs Options
             </button>
-            <p>{context.error}</p>
+            <p className="error">{context.error}</p>
           </div>
         );
       }}
