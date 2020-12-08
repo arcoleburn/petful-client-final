@@ -1,11 +1,12 @@
-body {
-  text-align: center;
-}
-
 .home {
   margin-top: 20%;
+  text-align: center;
 }
 
 .home p {
   font-size: 20px;
+}
+
+span {
+  font-weight: bolder;
 }

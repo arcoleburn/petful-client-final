@@ -4,6 +4,7 @@ import AdoptionPage from "./Components/AdoptionPage/AdoptionPage";
 import Cats from "./Components/AdoptionPage/Cats";
 import Dogs from "./Components/AdoptionPage/Dogs";
 import Context from "./Components/Context/Context";
+import Confirmation from "./Components/ConfirmationPage/ConfirmationPage";
 import { Route } from "react-router-dom";
 import { API_ENDPOINT } from "./config";
 import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
@@ -13,6 +14,8 @@ class App extends Component {
     dogs: [],
     cats: [],
     people: [],
+    error: "",
+    name: "",
     dogNode: null,
     catNode: null,
     personNode: null,
@@ -51,6 +54,21 @@ class App extends Component {
           });
         });
     },
+    addPeople: (name) => {
+      fetch(`${API_ENDPOINT}/people`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(name),
+      })
+        .then((res) => res.json())
+        .then((names) => {
+          this.setState({
+            people: [...this.state.people, names],
+          });
+        });
+    },
     adoptCat: () => {
       fetch(`${API_ENDPOINT}/cat`, {
         method: "DELETE",
@@ -86,6 +104,8 @@ class App extends Component {
     setCatNode: (nextCat) => this.setState({ catNode: nextCat }),
     setDogNode: (nextDog) => this.setState({ dogNode: nextDog }),
     setPeopleNode: (nextPerson) => this.setState({ peopleNode: nextPerson }),
+    setError: (error) => this.setState({ error: error }),
+    setName: (name) => this.setState({ name: name }),
   };
 
   componentDidMount() {
@@ -102,6 +122,7 @@ class App extends Component {
           <Route path="/adoption" component={AdoptionPage} />
           <Route path="/dog" component={Dogs} />
           <Route path="/cat" component={Cats} />
+          <Route path="/confirmation" component={Confirmation} />
         </ErrorBoundary>
       </Context.Provider>
     );

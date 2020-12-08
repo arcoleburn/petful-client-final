@@ -1,9 +1,24 @@
 import React from "react";
 import Context from "../Context/Context";
 
-export default function Dogs() {
-  const handleClickAdopt = () => {
+export default function Dogs(props) {
+  const handleClickAdopt = (e, context) => {
     console.log("adopt button was clicked!");
+    //add adoptDog from context
+    const name = context.name;
+    console.log(name);
+    const nameData = {
+      name: name,
+    };
+    if (!name) {
+      context.setError("Error: name is invalid");
+      console.log(props);
+    } else {
+      context.addPeople(nameData);
+      context.setName("");
+      console.log(props);
+      props.history.push("./confirmation");
+    }
   };
 
   const seeMoreDogs = (e, context) => {
@@ -43,7 +58,8 @@ export default function Dogs() {
             />
             <h3>Descriptions:</h3>
             <p>
-              <span className="bold">Story: </span> {context.dogNode.story}
+              <span className="bold">Story: </span>
+              {context.dogNode.story}
             </p>
             <p>
               <span className="bold">Gender: </span>
@@ -57,10 +73,13 @@ export default function Dogs() {
               {" "}
               <span className="bold">Breed: </span> {context.dogNode.breed}{" "}
             </p>
-            <button onClick={handleClickAdopt}>Adopt Me</button>
+            <button onClick={(e) => handleClickAdopt(e, context)}>
+              Adopt Me
+            </button>
             <button onClick={(e) => seeMoreDogs(e, context)}>
               More Dogs Options
             </button>
+            <p>{context.error}</p>
           </div>
         );
       }}
