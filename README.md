@@ -4,6 +4,9 @@ live app: https://petful-client-template-pearl.vercel.app/
 
 ## Built With
 
+- Reactjs
+- vanilla CSS
+
 ## Screenshots
 
 ![home_page](./src/images/home.png)
