@@ -63,9 +63,9 @@ class App extends Component {
         body: JSON.stringify(name),
       })
         .then((res) => res.json())
-        .then((names) => {
+        .then(() => {
           this.setState({
-            people: [...this.state.people, names],
+            people: [...this.state.people, name.name],
           });
         });
     },
@@ -79,7 +79,7 @@ class App extends Component {
         .then((res) => res.json())
         .then((data) => {
           this.setState({
-            people: data,
+            people: this.state.people.slice(1),
           });
         })
         .catch((e) => {
@@ -112,7 +112,7 @@ class App extends Component {
       })
         .then((data) => {
           this.setState({
-            dogs: data,
+            dogs: this.state.dogs.slice(1),
           });
         })
         .catch((e) => {

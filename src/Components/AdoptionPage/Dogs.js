@@ -4,48 +4,18 @@ import { Link } from "react-router-dom";
 
 export default function Dogs(props) {
   const handleClickAdopt = (e, context) => {
-    console.log("adopt button was clicked!");
-    //add adoptDog from context
+    const currentDog = context.dogs[0];
     const name = context.name;
-    console.log(name);
-    const nameData = {
-      name: name,
-    };
-    if (!name) {
-      context.setError("Error: name is invalid");
-      console.log(props);
-    } else {
-      context.dogs.pop();
-      context.addPeople(nameData);
-      console.log(props);
-      props.history.push("./confirmation");
-    }
-  };
-
-  const seeMoreDogs = (e, context) => {
-    if (
-      context.dogs.filter((dog, i) => {
-        const current = dog.name === context.dogNode.name;
-        if (current) {
-          const nextIndex = i + 1;
-          const nextDog = context.dogs[nextIndex];
-          if (!nextDog) {
-            context.setError("There are no more dogs in the database");
-          } else {
-            console.log(nextDog);
-            context.setDogNode(nextDog);
-            context.setError("");
-            return;
-          }
-        }
-      })
-    )
-      return;
-  };
-
-  const clearName = (e, context) => {
-    console.log("clearing name from dog route");
+    console.log(currentDog);
+    context.adoptDog(currentDog);
+    context.deletePeople(name);
+    context.setError("Congratulations! You are now a pet owner");
     context.setName("");
+    context.setDogNode(context.dogs[1]);
+  };
+
+  const clearError = (e, context) => {
+    context.setError("");
   };
 
   return (
@@ -61,7 +31,10 @@ export default function Dogs(props) {
         }
         return (
           <div>
-            <Link onClick={(e) => clearName(e, context)} to={{ pathname: "/" }}>
+            <Link
+              onClick={(e) => clearError(e, context)}
+              to={{ pathname: "/" }}
+            >
               <h1>Dogs</h1>
             </Link>
             <h2>{context.dogNode.name}</h2>
@@ -86,12 +59,14 @@ export default function Dogs(props) {
               {" "}
               <span className="bold">Breed: </span> {context.dogNode.breed}{" "}
             </p>
-            <button onClick={(e) => handleClickAdopt(e, context)}>
-              Adopt Me
-            </button>{" "}
-            <button onClick={(e) => seeMoreDogs(e, context)}>
+            {context.name.length > 1 && (
+              <button onClick={(e) => handleClickAdopt(e, context)}>
+                Adopt Me
+              </button>
+            )}{" "}
+            {/* <button onClick={(e) => seeMoreDogs(e, context)}>
               More Dogs Options
-            </button>
+            </button> */}
             <p className="error">{context.error}</p>
           </div>
         );

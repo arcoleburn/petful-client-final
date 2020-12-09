@@ -11,31 +11,38 @@ import Context from "../Context/Context";
 export default class Confirmations extends Component {
   static contextType = Context;
 
+  timeout = 0;
   componentDidMount() {
     // const props = this.state;
-    setInterval(() => {
-      console.log(this.context);
-      if (this.context.people.length > 5) {
-        const name =
-          this.context.people[0].last.value || this.context.people[0];
-        const nameData = {
-          name: name,
-        };
+    this.timeout = setInterval(() => {
+      if (this.context.people.length < 5) {
+        this.context.addPeople({ name: "random name" });
+        return;
+      }
+      if (this.context.people[0] !== this.context.name) {
+        const name = this.context.people[0];
         this.context.deletePeople(name);
         return;
       }
-      if (this.context.people.length < 5) {
-        this.context.people.push("random name");
+
+      if (this.context.error === "You are next in line!") {
+        this.context.setError(null);
+        this.props.history.push("/adoption");
         return;
       }
-      if (this.context.name == this.context.people[0]) {
-        setTimeout(() => {
-          this.context.setError("You are next in line!");
-        }, 5000);
-        this.props.history.push("/adopt");
+
+      if (
+        this.context.name === this.context.people[0] &&
+        this.context.people.length === 5
+      ) {
+        this.context.setError("You are next in line!");
         return;
       }
     }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeout);
   }
 
   render() {
@@ -48,13 +55,8 @@ export default class Confirmations extends Component {
               <h1>Please Wait In Line</h1>
               <p className="error">{context.error}</p>
               <ol>
-                {context.people.map((person, i) => {
-                  if (typeof person === "object") {
-                    console.log(person.last.value);
-                    return <li key={i}>{person.last.value}</li>;
-                  } else {
-                    return <li key={i}>{person}</li>;
-                  }
+                {this.context.people.map((person, i) => {
+                  return <li key={i}>{person}</li>;
                 })}
               </ol>
             </div>
