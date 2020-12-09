@@ -1,6 +1,7 @@
 # Petful Client
 
 live app: https://petful-client-template-pearl.vercel.app/
+server-side repo: https://github.com/eriyanto87/petful-server
 
 ## Built With
 
