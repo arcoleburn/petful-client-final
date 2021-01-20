@@ -13,7 +13,7 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <h2>Error: Couldn't load page due to invalid data</h2>;
+      return <h2>Error: Couldn't load page. Please refresh and try again, or come back later.</h2>;
     }
     return this.props.children;
   }
