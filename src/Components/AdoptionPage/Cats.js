@@ -14,26 +14,6 @@ export default function Cats(props) {
     context.setCatNode(context.cats[1]);
   };
 
-  // const seeMoreCats = (e, context) => {
-  //   if (
-  //     context.cats.filter((cat, i) => {
-  //       const current = cat.name === context.catNode.name;
-  //       if (current) {
-  //         console.log(i + 1);
-  //         const nextCat = context.cats[i + 1];
-  //         console.log(nextCat);
-  //         if (!nextCat) {
-  //           context.setError("There are no more cats in the database");
-  //         } else {
-  //           context.setCatNode(nextCat);
-  //           context.setError("");
-  //           return;
-  //         }
-  //       }
-  //     })
-  //   )
-  //     return;
-  // };
 
   const clearError = (e, context) => {
     context.setError("");
@@ -46,7 +26,7 @@ export default function Cats(props) {
         if (context.cats.length < 1) {
           return (
             <div>
-              <h3>No Cats in the Database</h3>
+              <h3>No Cats left to adopt!</h3>
             </div>
           );
         }
@@ -72,16 +52,14 @@ export default function Cats(props) {
               {context.catNode.gender}
             </p>
             <p>
-              {" "}
-              <span className="bold">Age: </span> {context.catNode.age}{" "}
+              <span className="bold">Age: </span> {context.catNode.age}
             </p>
             <p>
-              {" "}
-              <span className="bold">Breed: </span> {context.catNode.breed}{" "}
+              <span className="bold">Breed: </span> {context.catNode.breed}
             </p>
             {context.name.length > 1 && (
               <button onClick={(e) => handleClickAdopt(e, context)}>
-                Adopt Me
+                Adopt Me ? 
               </button>
             )}
             <p className="error">{context.error}</p>

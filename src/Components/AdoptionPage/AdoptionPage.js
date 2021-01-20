@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export default function AdoptionPage() {
   return (
     <div>
-      <h1>Pick your fury friend!</h1>
+      <h1>Choose Your Champion!</h1>
       <Link to={{ pathname: "/dog" }}>
         <button>Dogs</button>
-      </Link>{" "}
+      </Link>
       <Link to={{ pathname: "/cat" }}>
         <button>Cats</button>
       </Link>

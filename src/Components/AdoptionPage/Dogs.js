@@ -9,7 +9,7 @@ export default function Dogs(props) {
     console.log(currentDog);
     context.adoptDog(currentDog);
     context.deletePeople(name);
-    context.setError("Congratulations! You are now a pet owner");
+    context.setError("Congratulations! You got yourself a doggo!");
     context.setName("");
     context.setDogNode(context.dogs[1]);
   };
@@ -25,7 +25,7 @@ export default function Dogs(props) {
         if (context.dogs.length < 1) {
           return (
             <div>
-              <h3>No Dogs in the Database</h3>
+              <h3>No Dogs left to adopt!</h3>
             </div>
           );
         }
@@ -52,21 +52,16 @@ export default function Dogs(props) {
               {context.dogNode.gender}
             </p>
             <p>
-              {" "}
               <span className="bold">Age: </span> {context.dogNode.age}{" "}
             </p>
             <p>
-              {" "}
               <span className="bold">Breed: </span> {context.dogNode.breed}{" "}
             </p>
             {context.name.length > 1 && (
               <button onClick={(e) => handleClickAdopt(e, context)}>
                 Adopt Me
               </button>
-            )}{" "}
-            {/* <button onClick={(e) => seeMoreDogs(e, context)}>
-              More Dogs Options
-            </button> */}
+            )}
             <p className="error">{context.error}</p>
           </div>
         );
