@@ -44,7 +44,8 @@ export default class Confirmations extends Component {
           console.log(context);
           return (
             <div>
-              <h1>Please Wait In Line</h1>
+              <h1>You're in line!</h1>
+              <h3>You will be redirected when you are up.</h3>
               <p className="error">{context.error}</p>
               <ol>
                 {this.context.people.map((person, i) => {

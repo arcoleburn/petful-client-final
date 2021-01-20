@@ -26,10 +26,10 @@
 }
 
 .homeSection {
-  background-color: rgb(207, 207, 207, 0.55);
-  padding: 35px;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 55px;
   margin: 0 25px;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 
 img {
@@ -44,7 +44,11 @@ img {
 span {
   font-weight: bolder;
 }
-
+button, input{
+  border-radius: 15px;
+  padding: 15px;
+  margin: 5px;
+}
 li {
   list-style-type: none;
   padding-bottom: 10px;

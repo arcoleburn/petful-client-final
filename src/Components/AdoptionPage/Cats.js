@@ -49,7 +49,7 @@ export default function Cats(props) {
             </p>
             <p>
               <span className="bold">Gender: </span>
-              {context.catNode.gender}
+              {context.catNode.sex}
             </p>
             <p>
               <span className="bold">Age: </span> {context.catNode.age}
