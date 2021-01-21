@@ -30,7 +30,7 @@ export default class Confirmations extends Component {
         this.context.setError("You're next!!");
         return;
       }
-    }, 5000);
+    }, 2500);
   }
 
   componentWillUnmount() {

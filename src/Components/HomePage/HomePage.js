@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Context from '../Context/Context';
 
 export default function HomePage(props) {
+  const [started, setStarted] = useState(false);
+
   const handleClick = (e, context) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -26,7 +28,7 @@ export default function HomePage(props) {
         return (
           <div className="home">
             <div className="homeSection">
-              <h1>Welcome To F.I.F.O FIDO</h1>
+             {!started ? <><h1>Welcome To F.I.F.O FIDO</h1>
               <p>
                 We are an animal shelter dogs and cats too! We do
                 things a little differently here. Adoption is on a
@@ -36,25 +38,33 @@ export default function HomePage(props) {
                 Additionally, the only pets up for adoption at any
                 given time are the dog and cat who have been in our
                 shelter the longest. First In, First Out! FIFO FIDO!
-              </p>
-              <form
-                onSubmit={(e) => {
-                  handleClick(e, context);
-                }}
-              >
-                <p>
-                  <label>What's your name?</label>
-                </p>
-                <p>
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="John Smith"
-                  />
-                </p>
-                <p className="error">{context.error}</p>
-                <button type="submit">Find your furrever friend!</button>
-              </form>
+              </p> </> : null }
+              {!started ? (
+                <button onClick={() => setStarted(true)}>
+                  Let's start!
+                </button>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    handleClick(e, context);
+                  }}
+                >
+                  <p>
+                    <label>What's your name?</label>
+                  </p>
+                  <p>
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="John Smith"
+                    />
+                  </p>
+                  <p className="error">{context.error}</p>
+                  <button type="submit">
+                    Find your furrever friend!
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         );
